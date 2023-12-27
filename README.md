@@ -13,7 +13,7 @@ Before using this Terraform configuration, make sure you have the following:
 ## Quickstart
 
 1. Clone this repository to your local machine.
-2. Create your backend config file: ==config.s3.tfbackend==
+2. Create your backend config file: =config.s3.tfbackend=
 ```bash
 tee config.s3.tfbackend <<EOF
 access_key = "==[YOUR AWS ACCESS KEY]=="
@@ -26,7 +26,7 @@ workspace_key_prefix = "vultr"
 EOF
 ```
 3. Run `terraform init -backend-config=config.s3.tfbackend` to initialize the working directory.
-4. Create your tfstate file: ==terraform.tfvars==
+4. Create your tfstate file: =terraform.tfvars=
 ```bash
 tee terraform.tfvars <<EOF
 VULTR_API_KEY = "==[YOUR VULTR API KEY]=="
