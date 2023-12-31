@@ -17,3 +17,9 @@ variable "instances" {
   type        = list(map(string))
   description = "The list of instances to create."
 }
+
+variable "authorized_keys" {
+  type        = list(string)
+  description = "SSH key in list form to add to the root user."
+  default     = []
+}

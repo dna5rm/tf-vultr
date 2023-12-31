@@ -1,3 +1,5 @@
-output "instance_v4_address" {
-  value = vultr_instance.compute[*].main_ip
+# output all the instance attributes
+output "instance" {
+  value = "${vultr_instance.compute[*]}"
+  sensitive = true
 }
