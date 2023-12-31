@@ -94,20 +94,20 @@ resource "vultr_startup_script" "startup_script" {
   count = length(var.instances)
 
   # Create a startup script for each instance
-  name  = join("-", ["tf", try(var.instances[count.index].label, join("-", [terraform.workspace, count.index]))])
+  name   = join("-", ["tf", try(var.instances[count.index].label, join("-", [terraform.workspace, count.index]))])
   script = filebase64(fileexists("scripts/startup_${try(number(var.instances[count.index].os), lookup(local.os_name_to_id, var.instances[count.index].os_name, null))}.sh") ? "scripts/startup_${try(number(var.instances[count.index].os), lookup(local.os_name_to_id, var.instances[count.index].os_name, null))}.sh" : "scripts/startup.sh")
 }
 
 # Create a persistent block storage volume for each instance
 resource "vultr_block_storage" "block_storage" {
-  count  = length(vultr_instance.compute)
+  count = length(vultr_instance.compute)
 
-  label   = try(var.instances[count.index].label, join("-", ["tf", terraform.workspace, count.index]))
-  region  = try(lookup(local.city_to_id, var.instances[count.index].city, null), var.region)
-  size_gb = try(var.instances[count.index].block_storage_size, 10)
+  label                = try(var.instances[count.index].label, join("-", ["tf", terraform.workspace, count.index]))
+  region               = try(lookup(local.city_to_id, var.instances[count.index].city, null), var.region)
+  size_gb              = try(var.instances[count.index].block_storage_size, 40)
   attached_to_instance = vultr_instance.compute[count.index].id
-  block_type = "high_perf"
-  live = true
+  block_type           = "storage_opt" #"high_perf"
+  live                 = true
 }
 
 # Create the instances
