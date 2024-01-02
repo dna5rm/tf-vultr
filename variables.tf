@@ -1,6 +1,10 @@
 variable "VULTR_API_KEY" {}
 
-variable "domain" {}
+variable "domain" {
+  type        = string
+  description = "The vultr hosted domain to create the DNS records in."
+  default     = "example.com"
+}
 
 variable "region" {
   type        = string
@@ -11,11 +15,13 @@ variable "region" {
 variable "firewall_rules" {
   type        = list(map(string))
   description = "The list of firewall rules to create."
+  default     = []
 }
 
 variable "instances" {
   type        = list(map(string))
   description = "The list of instances to create."
+  default    = []
 }
 
 variable "authorized_keys" {

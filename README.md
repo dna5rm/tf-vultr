@@ -32,9 +32,9 @@ tee terraform.tfvars <<EOF
 VULTR_API_KEY = "==[YOUR VULTR API KEY]=="
 EOF
 ```
-4. Create new workspace `terraform workspace new lab` and its `lab.auto.tfvars` file...
+4. Create new `instances.auto.tfvars` file...
 ```bash
-tee lab.auto.tfvars <<EOF
+tee instances.auto.tfvars <<EOF
 domain = "domain.local"
 
 firewall_rules = [
