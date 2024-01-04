@@ -17,3 +17,14 @@ output "vultr_dns_zones" {
 #    }
 #  }
 #}
+
+output "vultr_vpcs" {
+  value = { for vpc in vultr_vpc2.vpc : vpc.id => {
+    description   = vpc.description,
+    region        = vpc.region,
+    ip_type       = vpc.ip_type,
+    ip_block      = vpc.ip_block,
+    prefix_length = vpc.prefix_length
+    }
+  }
+} 

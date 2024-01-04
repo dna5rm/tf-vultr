@@ -6,10 +6,16 @@ variable "dns_zones" {
 }
 
 variable "vpc_region_cidr" {
-  type = map(string)
+  type = map(any)
   default = {
-    "atl" = "10.65.0.0/16" # Atlanta
-    "ewr" = "10.71.0.0/16" # New Jersey
+    "atl" = {
+      description = "Atlanta VPC"
+      cidr        = "10.65.0.0/16"
+    }
+    "ewr" = {
+      description = "New Jersey VPC"
+      cidr        = "10.71.0.0/16"
+    }
   }
 }
 

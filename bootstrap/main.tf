@@ -51,3 +51,14 @@ resource "vultr_dns_record" "record" {
   ttl      = try(local.zone_records[count.index].record.ttl, null)
   priority = try(local.zone_records[count.index].record.priority, null)
 }
+
+# Create VPCs.
+resource "vultr_vpc2" "vpc" {
+  count = length(var.vpc_region_cidr)
+
+  description   = try(var.vpc_region_cidr[keys(var.vpc_region_cidr)[count.index]].description, keys(var.vpc_region_cidr)[count.index])
+  region        = keys(var.vpc_region_cidr)[count.index]
+  ip_type       = length(split(":", try(var.vpc_region_cidr[keys(var.vpc_region_cidr)[count.index]].cidr, ""))) > 1 ? "v6" : "v4"
+  ip_block      = split("/", var.vpc_region_cidr[keys(var.vpc_region_cidr)[count.index]].cidr)[0]
+  prefix_length = split("/", var.vpc_region_cidr[keys(var.vpc_region_cidr)[count.index]].cidr)[1]
+}

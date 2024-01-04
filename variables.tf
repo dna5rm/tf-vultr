@@ -25,7 +25,7 @@ variable "firewall_rules" {
 }
 
 variable "instances" {
-  type        = list(map(string))
+  type        = list(any)
   description = "The list of instances to create."
-  default    = []
+  default     = []
 }

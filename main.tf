@@ -126,6 +126,7 @@ resource "vultr_instance" "compute" {
 
   # Use the firewall group id
   firewall_group_id = vultr_firewall_group.fwg.id
+  vpc2_ids          = try(var.instances[count.index].vpc2_ids, [])
 }
 
 /**********************************************************************************************************************
